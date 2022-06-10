@@ -69,22 +69,37 @@ namespace csharp_bibliotecaMvc.Controllers
             if (ModelState.IsValid)
             {
                 Libro nuovoLibro = new Libro();
-                Autore nuovoAutore = new Autore();
+                //Autore nuovoAutore = new Autore();
                 nuovoLibro.Titolo = form["Titolo"];
                 nuovoLibro.Descrizione = form["Descrizione"];
                 nuovoLibro.Scaffale = form["Scaffale"];
                 nuovoLibro.Stato = (Stato)Enum.Parse(typeof(Stato), form["Stato"]);
 
-                nuovoAutore.AutoreName = form["AutoreName"];
-                _context.Add(nuovoAutore);
-               
-                //Autori = new List<Autore> { Dante }
-                nuovoLibro.Autori = new List<Autore> { nuovoAutore };
+                string str = form["AutoreName"];
+                string[] words = str.Split(',');
+                nuovoLibro.Autori = new List<Autore>();
+                foreach (string word in words)
+                {
+                    Autore nuovoAutore = new Autore() { AutoreName = word};
+                    nuovoLibro.Autori.Add(nuovoAutore); 
+                    _context.Autori.Add(nuovoAutore);
+                }
 
-                _context.Add(nuovoLibro);
+
+                _context.Libri.Add(nuovoLibro);
+
                 _context.SaveChanges();
-               
-               
+
+
+
+                //nuovoAutore.AutoreName = form["AutoreName"];
+
+
+                //Autori = new List<Autore> { Dante }
+
+
+
+
 
             }
 
