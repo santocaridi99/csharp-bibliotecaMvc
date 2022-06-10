@@ -36,7 +36,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Libroes}/{action=Index}/{id?}");
 
 //inizializzazione db
 using (var scope = app.Services.CreateScope())

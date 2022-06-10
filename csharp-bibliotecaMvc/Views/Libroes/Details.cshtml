@@ -1,0 +1,90 @@
+﻿@model csharp_bibliotecaMvc.Models.Libro
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Libro</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Titolo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Titolo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Descrizione)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Descrizione)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Scaffale)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Scaffale)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Stato)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stato)
+        </dd>
+
+        <dd class="col-sm-10">
+            <table class="table">
+                <tr>
+                    <th>Autori</th>
+                </tr>
+
+                @foreach (var item in Model.Autori)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AutoreName)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+        <dd class="col-sm-10">
+            <table class="table">
+                <tr>
+                    <th>Identificativo Prestito</th>
+                </tr>
+
+                @foreach (var item in Model.Prestiti)
+                {
+                    if (Model.Prestiti != null)
+                    {
+                         <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PrestitoID)
+                            </td>
+                        </tr>
+                        
+                    }
+                    else
+                    {
+                        <tr>
+                            <td>
+                                <span>Nessun Prestito associato</span>
+                            </td>
+                        </tr>
+                    }
+
+                }
+            </table>
+        </dd>
+        
+
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.libroID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
