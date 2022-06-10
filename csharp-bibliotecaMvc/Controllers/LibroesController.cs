@@ -54,6 +54,7 @@ namespace csharp_bibliotecaMvc.Controllers
         // GET: Libroes/Create
         public IActionResult Create()
         {
+            ViewData["listaAutoriAll"] = _context.Autori.ToList<Autore>();
             return View();
         }
 
@@ -135,12 +136,13 @@ namespace csharp_bibliotecaMvc.Controllers
             return View(libro);
         }
 
+
         // POST: Libroes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Titolo,Descrizione,Scaffale,Stato")] Libro libro)
+        public async Task<IActionResult> Edit(int id, [Bind("Titolo,Descrizione,Scaffale,Stato,AutoreName")] Libro libro)
         {
             if (id != libro.libroID)
             {
