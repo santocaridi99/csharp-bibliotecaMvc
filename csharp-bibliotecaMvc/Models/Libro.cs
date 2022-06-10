@@ -20,7 +20,7 @@ namespace csharp_bibliotecaMvc.Models
         public Stato Stato { get; set; }    
 
         public ICollection<Prestito>? Prestiti { get; set; }
-        public ICollection<Autore> Autori { get; set; }
+        public ICollection<Autore>? Autori { get; set; }
 
     }
 }

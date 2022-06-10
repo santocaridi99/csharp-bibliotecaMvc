@@ -142,7 +142,7 @@ namespace csharp_bibliotecaMvc.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Titolo,Descrizione,Scaffale,Stato,AutoreName")] Libro libro)
+        public async Task<IActionResult> Edit(int id, [Bind("libroID,Titolo,Descrizione,Scaffale,Stato,AutoreName")] Libro libro)
         {
             if (id != libro.libroID)
             {
@@ -153,6 +153,17 @@ namespace csharp_bibliotecaMvc.Controllers
             {
                 try
                 {
+                    string str = Request.Form["AutoreName"];
+                    string[] words = str.Split(',');
+                    libro.Autori = new List<Autore>();
+                   
+                    foreach (string word in words)
+                    {
+                        Autore updateAutore = new Autore() { AutoreName = word };
+                        libro.Autori.Add(updateAutore);
+                        _context.Autori.Update(updateAutore);
+                    }
+
                     _context.Update(libro);
                     await _context.SaveChangesAsync();
                 }
